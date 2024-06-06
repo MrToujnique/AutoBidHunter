@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import '../env';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Auto Bid Hunter",
-  description: "Best cars auctions platform ever made!",
+  title: 'Auto Bid Hunter',
+  description: 'Best cars auctions platform ever made!',
 };
 
 export default function RootLayout({
