@@ -1,5 +1,41 @@
 DO $$ BEGIN
+ CREATE TYPE "public"."accident_free" AS ENUM('yes', 'no');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."body_type" AS ENUM('city_car', 'hatchback', 'coupe', 'cabrio', 'station_wagon', 'compact', 'minivan', 'sedan', 'suv', 'van');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
  CREATE TYPE "public"."condition" AS ENUM('new', 'used');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."drivetrain" AS ENUM('FWD', 'RWD', 'AWD');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."fuel_type" AS ENUM('petrol', 'diesel', 'hybrid', 'electric', 'lpg', 'cng', 'ethanol', 'hydrogen');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."serviced_at_dealer" AS ENUM('yes', 'no');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."transmission" AS ENUM('manual', 'automatic');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -11,7 +47,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "auction" (
-	"id" serial NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"starting_price" text,
 	"current_price" text,
 	"make" text,
@@ -19,23 +55,23 @@ CREATE TABLE IF NOT EXISTS "auction" (
 	"year" serial NOT NULL,
 	"mileage" serial NOT NULL,
 	"engine_capacity" text,
-	"fuel_type" text,
+	"fuel_type" "fuel_type",
 	"power" serial NOT NULL,
-	"transmission" text,
-	"drivetrain" text,
+	"transmission" "transmission",
+	"drivetrain" "drivetrain",
 	"vin" text,
-	"body_type" text,
+	"body_type" "body_type",
 	"door_count" serial NOT NULL,
 	"seat_count" serial NOT NULL,
 	"color" text,
-	"accident_free" text,
-	"serviced_at_dealer" text,
+	"accident_free" "accident_free",
+	"serviced_at_dealer" "serviced_at_dealer",
 	"condition" "condition",
 	"description" text
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "bid" (
-	"id" serial NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"amount" numeric NOT NULL,
 	"auction_id" integer,
 	"bidder_id" integer,
@@ -44,14 +80,14 @@ CREATE TABLE IF NOT EXISTS "bid" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "favorite" (
-	"id" serial NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer,
 	"auction_id" integer,
 	"created_at" timestamp NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "message" (
-	"id" serial NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"sender_id" integer,
 	"receiver_id" integer,
 	"content" text NOT NULL,
@@ -59,8 +95,9 @@ CREATE TABLE IF NOT EXISTS "message" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user" (
-	"id" serial NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"first_name" text,
+	"last_name" text,
 	"user_type" "user_type",
 	"phone_number" text,
 	"location" text,
@@ -70,7 +107,7 @@ CREATE TABLE IF NOT EXISTS "user" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "won_auction" (
-	"id" serial NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"auction_id" integer,
 	"winner_id" integer,
 	"invoice_pdf" text,

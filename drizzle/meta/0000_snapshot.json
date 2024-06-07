@@ -1,5 +1,5 @@
 {
-  "id": "d6528124-6146-4af6-bea5-a03af0e76285",
+  "id": "489cc172-5149-4dc7-8ddd-840b7fd74402",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -11,7 +11,7 @@
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "starting_price": {
@@ -58,7 +58,8 @@
         },
         "fuel_type": {
           "name": "fuel_type",
-          "type": "text",
+          "type": "fuel_type",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -70,13 +71,15 @@
         },
         "transmission": {
           "name": "transmission",
-          "type": "text",
+          "type": "transmission",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
         "drivetrain": {
           "name": "drivetrain",
-          "type": "text",
+          "type": "drivetrain",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -88,7 +91,8 @@
         },
         "body_type": {
           "name": "body_type",
-          "type": "text",
+          "type": "body_type",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -112,13 +116,15 @@
         },
         "accident_free": {
           "name": "accident_free",
-          "type": "text",
+          "type": "accident_free",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
         "serviced_at_dealer": {
           "name": "serviced_at_dealer",
-          "type": "text",
+          "type": "serviced_at_dealer",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -148,7 +154,7 @@
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "amount": {
@@ -221,7 +227,7 @@
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "user_id": {
@@ -282,7 +288,7 @@
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "sender_id": {
@@ -349,11 +355,17 @@
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "first_name": {
           "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -411,7 +423,7 @@
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "auction_id": {
@@ -473,12 +485,75 @@
     }
   },
   "enums": {
+    "public.accident_free": {
+      "name": "accident_free",
+      "schema": "public",
+      "values": [
+        "yes",
+        "no"
+      ]
+    },
+    "public.body_type": {
+      "name": "body_type",
+      "schema": "public",
+      "values": [
+        "city_car",
+        "hatchback",
+        "coupe",
+        "cabrio",
+        "station_wagon",
+        "compact",
+        "minivan",
+        "sedan",
+        "suv",
+        "van"
+      ]
+    },
     "public.condition": {
       "name": "condition",
       "schema": "public",
       "values": [
         "new",
         "used"
+      ]
+    },
+    "public.drivetrain": {
+      "name": "drivetrain",
+      "schema": "public",
+      "values": [
+        "FWD",
+        "RWD",
+        "AWD"
+      ]
+    },
+    "public.fuel_type": {
+      "name": "fuel_type",
+      "schema": "public",
+      "values": [
+        "petrol",
+        "diesel",
+        "hybrid",
+        "electric",
+        "lpg",
+        "cng",
+        "ethanol",
+        "hydrogen"
+      ]
+    },
+    "public.serviced_at_dealer": {
+      "name": "serviced_at_dealer",
+      "schema": "public",
+      "values": [
+        "yes",
+        "no"
+      ]
+    },
+    "public.transmission": {
+      "name": "transmission",
+      "schema": "public",
+      "values": [
+        "manual",
+        "automatic"
       ]
     },
     "public.user_type": {
