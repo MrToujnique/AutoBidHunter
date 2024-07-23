@@ -3,8 +3,8 @@ import React from 'react';
 const Page = () => {
   return (
     <div>
-      <h1>Hello, Vercel!</h1>
-      <p>This is a simple page for deployment testing.</p>
+      <h1>404</h1>
+      <p>Not found</p>
     </div>
   );
 };

@@ -1,0 +1,21 @@
+{
+  "messages": {
+    "photosAbbreviation": "photos",
+    "auction": "Auction",
+    "insertSumYouWantToOffer": "Enter the amount you want to offer:",
+    "bid": "Bid",
+    "bidAmount": "Bid Amount"
+  },
+  "carSpecs": {
+    "transmission": "Transmission",
+    "automatic": "Automatic",
+    "manual": "Manual",
+    "mileage": "Mileage",
+    "engineCapacity": "Engine Capacity",
+    "parameters": "Parameters",
+    "make": "Make",
+    "model": "Model",
+    "yearOfManufacture": "Year of Manufacture",
+    "price": "Price"
+  }
+}

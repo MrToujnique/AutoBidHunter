@@ -1,0 +1,21 @@
+{
+  "messages": {
+    "photosAbbreviation": "zdj.",
+    "auction": "Licytacja",
+    "insertSumYouWantToOffer": "Wprowadź kwotę, którą chcesz zaoferować:",
+    "bid": "Licytuj",
+    "bidAmount": "Oferowana kwota"
+  },
+  "carSpecs": {
+    "transmission": "Skrzynia biegów",
+    "automatic": "Automatyczna",
+    "manual": "Manualna",
+    "mileage": "Przebieg",
+    "engineCapacity": "Pojemność silnika",
+    "parameters": "Parametry",
+    "make": "Marka",
+    "model": "Model",
+    "yearOfManufacture": "Rok produkcji",
+    "price": "Cena"
+  }
+}

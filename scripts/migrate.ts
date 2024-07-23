@@ -11,7 +11,11 @@ async function main() {
     throw new Error('POSTGRES_URL is missing');
   }
 
-  await migrate(db, { migrationsFolder: './drizzle' });
+  try {
+    await migrate(db, { migrationsFolder: './drizzle' });
+  } catch (error) {
+    console.log('Error during migration: ', error);
+  }
 }
 
 main();
