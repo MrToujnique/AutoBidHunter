@@ -1,14 +1,3 @@
-export enum EUserType {
-  Seller = 'seller',
-  Buyer = 'buyer',
-}
+import * as schema from '../lib/schema';
 
-export interface IUser {
-  id: number;
-  firstName: string;
-  userType: EUserType;
-  phoneNumber: string;
-  location: string;
-  isCompany: boolean;
-  email: string;
-}
+export type TNewUser = typeof schema.users.$inferInsert;

@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import '../globals.css';
 import { Cormorant_Garamond } from 'next/font/google';
 import { Chivo } from 'next/font/google';
-import { getLocale } from 'next-intl/server';
+import { getLocale, getMessages } from 'next-intl/server';
+import Providers from '@/providers';
+import { NextIntlClientProvider } from 'next-intl';
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
@@ -25,12 +27,20 @@ export const metadata: Metadata = {
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   const locale = await getLocale();
 
+  const messages = await getMessages();
+
   return (
     <html
       lang={locale}
       className={cormorantGaramond.variable + ' ' + chivo.variable}
     >
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </Providers>
+      </body>
     </html>
   );
 };

@@ -1,5 +1,5 @@
 {
-  "id": "489cc172-5149-4dc7-8ddd-840b7fd74402",
+  "id": "ae574db8-ec61-4673-8ffd-3cb3e263260a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -114,36 +114,56 @@
           "primaryKey": false,
           "notNull": false
         },
-        "accident_free": {
-          "name": "accident_free",
-          "type": "accident_free",
-          "typeSchema": "public",
+        "is_accident_free": {
+          "name": "is_accident_free",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": true
         },
-        "serviced_at_dealer": {
-          "name": "serviced_at_dealer",
-          "type": "serviced_at_dealer",
-          "typeSchema": "public",
+        "is_serviced_at_dealer": {
+          "name": "is_serviced_at_dealer",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": false
         },
-        "condition": {
-          "name": "condition",
-          "type": "condition",
-          "typeSchema": "public",
+        "is_new": {
+          "name": "is_new",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": false
         },
         "description": {
           "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "auction_user_id_user_id_fk": {
+          "name": "auction_user_id_user_id_fk",
+          "tableFrom": "auction",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -364,18 +384,12 @@
           "primaryKey": false,
           "notNull": false
         },
-        "last_name": {
-          "name": "last_name",
-          "type": "text",
+        "is_seller": {
+          "name": "is_seller",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": false
-        },
-        "user_type": {
-          "name": "user_type",
-          "type": "user_type",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": false
         },
         "phone_number": {
           "name": "phone_number",
@@ -485,14 +499,6 @@
     }
   },
   "enums": {
-    "public.accident_free": {
-      "name": "accident_free",
-      "schema": "public",
-      "values": [
-        "yes",
-        "no"
-      ]
-    },
     "public.body_type": {
       "name": "body_type",
       "schema": "public",
@@ -507,14 +513,6 @@
         "sedan",
         "suv",
         "van"
-      ]
-    },
-    "public.condition": {
-      "name": "condition",
-      "schema": "public",
-      "values": [
-        "new",
-        "used"
       ]
     },
     "public.drivetrain": {
@@ -540,28 +538,12 @@
         "hydrogen"
       ]
     },
-    "public.serviced_at_dealer": {
-      "name": "serviced_at_dealer",
-      "schema": "public",
-      "values": [
-        "yes",
-        "no"
-      ]
-    },
     "public.transmission": {
       "name": "transmission",
       "schema": "public",
       "values": [
         "manual",
         "automatic"
-      ]
-    },
-    "public.user_type": {
-      "name": "user_type",
-      "schema": "public",
-      "values": [
-        "seller",
-        "buyer"
       ]
     }
   },

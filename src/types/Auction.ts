@@ -1,7 +1,17 @@
+import { AuctionSchema } from '@/schemas/AuctionSchemas';
+import * as schema from '../lib/schema';
+import { z } from 'zod';
+
 export enum ECondition {
   New = 'new',
   Used = 'used',
 }
+
+export type TAuction = z.infer<typeof AuctionSchema>;
+
+export type TNewAuction = typeof schema.auctions.$inferInsert;
+
+export type TFuelType = typeof schema.fuelTypeEnum;
 
 export interface IAuction {
   id: number;
@@ -27,4 +37,8 @@ export interface IAuction {
   description: string;
   sellerId: number;
   gallery: string[];
+}
+
+export interface IAuctionSliceState {
+  auctions: TAuction[];
 }

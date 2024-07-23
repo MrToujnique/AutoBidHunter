@@ -1,5 +1,4 @@
 import { ECondition, IAuction } from './types/Auction';
-import { EUserType } from './types/User';
 
 const getRandomElement = <T>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
@@ -59,24 +58,7 @@ export const generateAuction = (id: number, sellerId: number): IAuction => ({
   ],
 });
 
-export const translateUserType = (userType: EUserType): string => {
-  switch (userType) {
-    case EUserType.Seller:
-      return 'Wystawiający';
-    case EUserType.Buyer:
-      return 'Kupujący';
-    default:
-      return '';
-  }
-};
-
-export const translateCondition = (condition: ECondition): string => {
-  switch (condition) {
-    case ECondition.New:
-      return 'Nowy';
-    case ECondition.Used:
-      return 'Używany';
-    default:
-      return '';
-  }
+export const translateCondition = (isNew: boolean): string => {
+  if (isNew) return 'Nowy';
+  return 'Używany';
 };

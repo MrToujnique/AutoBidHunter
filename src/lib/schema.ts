@@ -9,8 +9,6 @@ import {
   timestamp,
 } from 'drizzle-orm/pg-core';
 
-export const userTypeEnum = pgEnum('user_type', ['seller', 'buyer']);
-export const conditionEnum = pgEnum('condition', ['new', 'used']);
 export const fuelTypeEnum = pgEnum('fuel_type', [
   'petrol',
   'diesel',
@@ -35,13 +33,11 @@ export const bodyTypeEnum = pgEnum('body_type', [
   'suv',
   'van',
 ]);
-export const accidentFreeEnum = pgEnum('accident_free', ['yes', 'no']);
-export const servicedAtDealerEnum = pgEnum('serviced_at_dealer', ['yes', 'no']);
 
 export const users = pgTable('user', {
   id: serial('id').primaryKey(),
   firstName: text('first_name'),
-  userType: userTypeEnum('user_type'),
+  isSeller: boolean('is_seller').default(false),
   phoneNumber: text('phone_number'),
   location: text('location'),
   isCompany: boolean('is_company').default(false),
@@ -66,10 +62,11 @@ export const auctions = pgTable('auction', {
   doorCount: serial('door_count'),
   seatCount: serial('seat_count'),
   color: text('color'),
-  accidentFree: accidentFreeEnum('accident_free'),
-  servicedAtDealer: servicedAtDealerEnum('serviced_at_dealer'),
-  condition: conditionEnum('condition'),
+  isAccidentFree: boolean('is_accident_free').default(true),
+  isServicedAtDealer: boolean('is_serviced_at_dealer').default(false),
+  isNew: boolean('is_new').default(false),
   description: text('description'),
+  userId: integer('user_id').references(() => users.id),
 });
 
 export const bids = pgTable('bid', {

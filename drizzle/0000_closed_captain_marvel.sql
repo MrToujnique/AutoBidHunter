@@ -1,17 +1,5 @@
 DO $$ BEGIN
- CREATE TYPE "public"."accident_free" AS ENUM('yes', 'no');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  CREATE TYPE "public"."body_type" AS ENUM('city_car', 'hatchback', 'coupe', 'cabrio', 'station_wagon', 'compact', 'minivan', 'sedan', 'suv', 'van');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."condition" AS ENUM('new', 'used');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -29,19 +17,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- CREATE TYPE "public"."serviced_at_dealer" AS ENUM('yes', 'no');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  CREATE TYPE "public"."transmission" AS ENUM('manual', 'automatic');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."user_type" AS ENUM('seller', 'buyer');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -64,10 +40,11 @@ CREATE TABLE IF NOT EXISTS "auction" (
 	"door_count" serial NOT NULL,
 	"seat_count" serial NOT NULL,
 	"color" text,
-	"accident_free" "accident_free",
-	"serviced_at_dealer" "serviced_at_dealer",
-	"condition" "condition",
-	"description" text
+	"is_accident_free" boolean DEFAULT true,
+	"is_serviced_at_dealer" boolean DEFAULT false,
+	"is_new" boolean DEFAULT false,
+	"description" text,
+	"user_id" integer
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "bid" (
@@ -97,8 +74,7 @@ CREATE TABLE IF NOT EXISTS "message" (
 CREATE TABLE IF NOT EXISTS "user" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"first_name" text,
-	"last_name" text,
-	"user_type" "user_type",
+	"is_seller" boolean DEFAULT false,
 	"phone_number" text,
 	"location" text,
 	"is_company" boolean DEFAULT false,
@@ -113,6 +89,12 @@ CREATE TABLE IF NOT EXISTS "won_auction" (
 	"invoice_pdf" text,
 	"created_at" timestamp NOT NULL
 );
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "auction" ADD CONSTRAINT "auction_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "bid" ADD CONSTRAINT "bid_auction_id_auction_id_fk" FOREIGN KEY ("auction_id") REFERENCES "public"."auction"("id") ON DELETE no action ON UPDATE no action;
