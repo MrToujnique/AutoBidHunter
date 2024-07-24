@@ -118,11 +118,10 @@ const AuctionPage = async ({ auctionId, locale }: IAuctionPage) => {
               </div>
             </div>
           </div>
-          <div className="space-y-2 border rounded-lg p-4">
-            <h2 className="text-2xl font-bold">{t('carSpecs.price')}</h2>
-            <p className="text-4xl font-bold">{currentPrice} PLN</p>
-          </div>
-          <PlaceBidSection />
+          <PlaceBidSection
+            auctionId={auction.id}
+            currentPriceServerSide={auction.currentPrice}
+          />
           {/* <div className="space-y-2">
             <h2 className="text-2xl font-bold">Contact Seller</h2>
             <form className="grid gap-4">

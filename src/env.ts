@@ -10,6 +10,7 @@ const envVariables = z.object({
   POSTGRES_URL_NO_SSL: z.string(),
   POSTGRES_USER: z.string(),
   POSTGRES_PORT: z.number(),
+  SOCKET_SERVER_URL: z.string(),
 });
 
 envVariables.parse(process.env);

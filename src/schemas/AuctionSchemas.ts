@@ -27,3 +27,5 @@ export const AuctionSchema = z.object({
 });
 
 export const AuctionsSchema = z.array(AuctionSchema);
+
+export const UpdatedBidSchema = z.object({ currentPrice: z.string() });
