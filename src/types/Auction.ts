@@ -41,4 +41,11 @@ export interface IAuction {
 
 export interface IAuctionSliceState {
   auctions: TAuction[];
+  currentAuctionPrice: string;
+}
+
+export interface IUpdateAuctionBidInput {
+  auctionId: number;
+  amount: string;
+  userId: number;
 }

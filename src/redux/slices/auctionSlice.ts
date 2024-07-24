@@ -4,6 +4,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: IAuctionSliceState = {
   auctions: [],
+  currentAuctionPrice: '0',
 };
 
 export const auctionSlice = createSlice({
@@ -16,9 +17,15 @@ export const auctionSlice = createSlice({
     ) => {
       state.auctions = payload.auctions;
     },
+    updateAuctionCurrentPrice: (
+      state,
+      { payload }: PayloadAction<{ currentPrice: string }>,
+    ) => {
+      state.currentAuctionPrice = payload.currentPrice;
+    },
   },
 });
 
-export const { setAuctions } = auctionSlice.actions;
+export const { setAuctions, updateAuctionCurrentPrice } = auctionSlice.actions;
 
 export default auctionSlice.reducer;

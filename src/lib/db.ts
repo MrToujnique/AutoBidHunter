@@ -1,9 +1,9 @@
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 import * as schema from './schema';
 import { sql } from '@vercel/postgres';
-import { auctions, users } from './schema';
+import { auctions, users, bids } from './schema';
 import { TNewUser } from '@/types/User';
-import { TNewAuction } from '@/types/Auction';
+import { IUpdateAuctionBidInput, TNewAuction } from '@/types/Auction';
 import { eq } from 'drizzle-orm';
 
 export const db = drizzle(sql, { schema });
@@ -45,4 +45,29 @@ export const insertAuctions = async (auction: TNewAuction[]) => {
 export const cleanDb = async () => {
   await db.delete(auctions);
   await db.delete(users);
+};
+
+export const updateAuctionBid = async ({
+  auctionId,
+  amount,
+  userId,
+}: IUpdateAuctionBidInput) => {
+  try {
+    await db
+      .update(auctions)
+      .set({ currentPrice: amount })
+      .where(eq(auctions.id, auctionId));
+
+    await db.insert(bids).values({
+      amount,
+      auctionId,
+      bidderId: userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    return { currentPrice: amount };
+  } catch (error) {
+    return error;
+  }
 };
