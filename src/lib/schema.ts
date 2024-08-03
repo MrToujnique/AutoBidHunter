@@ -67,6 +67,7 @@ export const auctions = pgTable('auction', {
   isNew: boolean('is_new').default(false),
   description: text('description'),
   userId: integer('user_id').references(() => users.id),
+  endsAt: timestamp('ends_at').notNull(),
 });
 
 export const bids = pgTable('bid', {

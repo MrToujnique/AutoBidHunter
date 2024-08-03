@@ -7,12 +7,16 @@ export const bidTheAuction = async ({
   amount,
   auctionId,
   userId,
+  endsAt,
+  timeLeft,
 }: IUpdateAuctionBidInput) => {
   try {
     const result = await updateAuctionBid({
       amount,
       auctionId,
       userId,
+      endsAt,
+      timeLeft,
     });
 
     return result;

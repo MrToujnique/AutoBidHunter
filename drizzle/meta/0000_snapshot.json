@@ -1,5 +1,5 @@
 {
-  "id": "ae574db8-ec61-4673-8ffd-3cb3e263260a",
+  "id": "fa41a62f-6f68-4238-bc29-03b99deaf886",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -146,6 +146,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "ends_at": {
+          "name": "ends_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},

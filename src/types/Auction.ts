@@ -47,5 +47,7 @@ export interface IAuctionSliceState {
 export interface IUpdateAuctionBidInput {
   auctionId: number;
   amount: string;
+  endsAt: string;
+  timeLeft: number | null;
   userId: number;
 }

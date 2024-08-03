@@ -4,7 +4,8 @@
     "auction": "Licytacja",
     "insertSumYouWantToOffer": "Wprowadź kwotę, którą chcesz zaoferować:",
     "bid": "Licytuj",
-    "bidAmount": "Oferowana kwota"
+    "bidAmount": "Oferowana kwota",
+    "auctionEnded": "Aukcja zakończona"
   },
   "carSpecs": {
     "transmission": "Skrzynia biegów",
@@ -17,5 +18,8 @@
     "model": "Model",
     "yearOfManufacture": "Rok produkcji",
     "price": "Cena"
+  },
+  "errorMessages": {
+    "timeManipulationDetected": "Wykryto manipulację czasu na Twoim komputerze, prosimy ustawić poprawną datę"
   }
 }

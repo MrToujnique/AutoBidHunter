@@ -51,8 +51,24 @@ export const updateAuctionBid = async ({
   auctionId,
   amount,
   userId,
+  endsAt,
+  timeLeft,
 }: IUpdateAuctionBidInput) => {
   try {
+    let newEndsAt: Date | null = null;
+
+    if (timeLeft && timeLeft > 0 && timeLeft <= 120000) {
+      newEndsAt = new Date(Date.now() + 2 * 60 * 1000);
+
+      await db
+        .update(auctions)
+        .set({
+          currentPrice: amount,
+          endsAt: newEndsAt,
+        })
+        .where(eq(auctions.id, auctionId));
+    }
+
     await db
       .update(auctions)
       .set({ currentPrice: amount })
@@ -66,7 +82,7 @@ export const updateAuctionBid = async ({
       updatedAt: new Date(),
     });
 
-    return { currentPrice: amount };
+    return { currentPrice: amount, endsAt: newEndsAt || new Date(endsAt) };
   } catch (error) {
     return error;
   }
