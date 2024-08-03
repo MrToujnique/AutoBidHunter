@@ -62,3 +62,26 @@ export const translateCondition = (isNew: boolean): string => {
   if (isNew) return 'Nowy';
   return 'Używany';
 };
+
+export const formatTimeLeft = (timeLeft: number | null) => {
+  if (!timeLeft) return '';
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+  const seconds = Math.floor((timeLeft / 1000) % 60);
+
+  if (days > 0) {
+    return `${days}d ${hours}h`;
+  }
+  if (hours > 0) {
+    return `${hours}h ${minutes}min`;
+  }
+  if (minutes > 9) {
+    return `${minutes}min`;
+  }
+  if (minutes > 0) {
+    return `${minutes}min ${seconds}sec`;
+  }
+  return `${seconds}sec`;
+};

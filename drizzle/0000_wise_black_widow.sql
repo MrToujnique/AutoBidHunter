@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS "auction" (
 	"is_serviced_at_dealer" boolean DEFAULT false,
 	"is_new" boolean DEFAULT false,
 	"description" text,
-	"user_id" integer
+	"user_id" integer,
+	"ends_at" timestamp NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "bid" (

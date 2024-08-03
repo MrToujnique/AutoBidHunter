@@ -24,8 +24,12 @@ export const AuctionSchema = z.object({
   description: z.string(),
   sellerId: z.number().optional(),
   gallery: z.array(z.string()).optional(),
+  endsAt: z.date(),
 });
 
 export const AuctionsSchema = z.array(AuctionSchema);
 
-export const UpdatedBidSchema = z.object({ currentPrice: z.string() });
+export const UpdatedBidSchema = z.object({
+  currentPrice: z.string(),
+  endsAt: z.date(),
+});

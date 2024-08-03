@@ -4,7 +4,8 @@
     "auction": "Auction",
     "insertSumYouWantToOffer": "Enter the amount you want to offer:",
     "bid": "Bid",
-    "bidAmount": "Bid Amount"
+    "bidAmount": "Bid Amount",
+    "auctionEnded": "The auction has ended"
   },
   "carSpecs": {
     "transmission": "Transmission",
@@ -17,5 +18,8 @@
     "model": "Model",
     "yearOfManufacture": "Year of Manufacture",
     "price": "Price"
+  },
+  "errorMessages": {
+    "timeManipulationDetected": "Time manipulation has been detected on your computer, please set the correct date"
   }
 }

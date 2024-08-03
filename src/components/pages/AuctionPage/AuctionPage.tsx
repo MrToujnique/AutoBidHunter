@@ -25,6 +25,7 @@ const AuctionPage = async ({ auctionId, locale }: IAuctionPage) => {
     description,
     doorCount,
     drivetrain,
+    endsAt,
     engineCapacity,
     fuelType,
     id,
@@ -119,8 +120,9 @@ const AuctionPage = async ({ auctionId, locale }: IAuctionPage) => {
             </div>
           </div>
           <PlaceBidSection
-            auctionId={auction.id}
-            currentPriceServerSide={auction.currentPrice}
+            auctionId={id}
+            currentPriceServerSide={currentPrice}
+            endsAt={endsAt.toISOString()}
           />
           {/* <div className="space-y-2">
             <h2 className="text-2xl font-bold">Contact Seller</h2>
